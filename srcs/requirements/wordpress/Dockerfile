@@ -3,6 +3,7 @@ FROM debian:bookworm
 #install PHP-FPM and PHP-MySQL
 RUN apt update -y && \
     apt install -y \
+    netcat-openbsd \
     php8.2 \
     php8.2-fpm \
     php8.2-mysql \

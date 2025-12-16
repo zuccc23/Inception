@@ -26,6 +26,27 @@ services:
         volumes:
             - wordpress-volume:/var/www/html
 
+    #---- MARIADB ----#
+    mariadb:
+        container_name: mariadb
+        build:
+            context: ./requirements/mariadb
+            dockerfile: Dockerfile
+        image: mariadb
+        restart: always
+        ports:
+            - "3306:3306"
+        
+        env_file:
+            - .env
+        
+        networks:
+            - inception-network
+        
+        #volume for database
+        volumes:
+            - mariadb-volume:/var/lib/mysql
+
     #---- WORDPRESS ----#
     wordpress:
         container_name: wordpress
@@ -39,35 +60,17 @@ services:
         env_file:
             - .env
                     
-                #wp needs to wait for mariadb db
+        #wp needs to wait for mariadb db
         depends_on:
             - mariadb
                 
         networks:
             - inception-network
                 
-                #volume for wordpress files
+        #volume for wordpress files
         volumes:
             - wordpress-volume:/var/www/html
-        
-    #---- MARIADB ----#
-    mariadb:
-        container_name: mariadb
-        build:
-            context: ./requirements/mariadb
-            dockerfile: Dockerfile
-        image: mariadb-inception
-        restart: always
-        
-        env_file:
-            - .env
-        
-        networks:
-            - inception-network
-        
-        #volume for database
-        volumes:
-            - mariadb-volume:/var/lib/mysql
+
             
 #define volumes
 volumes:

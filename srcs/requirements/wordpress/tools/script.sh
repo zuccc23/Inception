@@ -1,5 +1,12 @@
 #!/bin/bash
 
+while ! nc -z mariadb 3306; do
+    echo "MariaDB is unavailable - waiting 2 seconds..."
+    sleep 2
+done
+
+echo "MariaDB is ready. Proceeding with WordPress setup."
+
 if [ -f "wp-config.php" ]; then
     echo "WordPress is already configured. Starting PHP-FPM..."
    

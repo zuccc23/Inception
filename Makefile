@@ -54,11 +54,11 @@ fclean: clean
 # --- HELPER TARGETS ---
 # Access the NGINX container shell
 shell-nginx:
-	$(DOCKER_COMPOSE) exec nginx sh
+	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) exec nginx sh
 
 # Access the WORDPRESS container shell
 shell-wordpress:
-	$(DOCKER_COMPOSE) exec wordpress sh
+	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) exec wordpress sh
 
 # Access the MARIADB container shell
 shell-mariadb:
