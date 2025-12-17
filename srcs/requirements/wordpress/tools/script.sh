@@ -1,11 +1,14 @@
 #!/bin/bash
 
+sleep 30
 while ! nc -z mariadb 3306; do
     echo "MariaDB is unavailable - waiting 2 seconds..."
     sleep 2
 done
 
 echo "MariaDB is ready. Proceeding with WordPress setup."
+
+cd var/www/html
 
 if [ -f "wp-config.php" ]; then
     echo "WordPress is already configured. Starting PHP-FPM..."
@@ -16,7 +19,7 @@ else
 		#download wp core files
 			#we must allow root bc wp usually refuses it
 		wp core download --allow-root
-		
+		echo "WordPress core downloaded ---> starting config create."
 		#create out config file (wp-config.php)
 			#and connect to mariadb by giving db info
 		wp config create --allow-root \

@@ -79,13 +79,22 @@ volumes:
     wordpress-volume:
         #data stored on our local machine (regular storage)
         driver: local
-    
+        driver_opts:
+            type: none
+            o: bind
+            device: /home/dahmane/data/wordpress
+
     #stores db files
     mariadb-volume:
         driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /home/dahmane/data/mariadb
 
 #define internal-communication network
 networks:
     inception-network:
     #bridge means containers can reachout via their service names
         driver: bridge
+        

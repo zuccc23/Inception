@@ -1,12 +1,12 @@
 DOCKER_COMPOSE = docker compose
 COMPOSE_FILE = ./srcs/docker-compose.yml
 NAME = inception
+VOLUME = /home/dahmane/data/wordpress /home/dahmane/data/mariadb
 
 # --- MAIN TARGETS ---
 all: build up
 
 # Builds or re-builds all services without starting them.
-
 build:
 	@echo "🛠️ Building Docker images..."
 	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) build
