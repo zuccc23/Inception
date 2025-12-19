@@ -30,5 +30,5 @@ RUN rm -rf /var/www/html/index.nginx-debian.html
 #makes port 443 accessible
 EXPOSE 443
 
-#keeps Nginx running so the container stays alive
+#keeps Nginx running so the container stays alive (=daemon off)
 CMD ["nginx", "-g", "daemon off;"]

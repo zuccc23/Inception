@@ -20,14 +20,14 @@ else
 			#we must allow root bc wp usually refuses it
 		wp core download --allow-root
 		echo "WordPress core downloaded ---> starting config create."
-		#create out config file (wp-config.php)
+		#create our config file (wp-config.php)
 			#and connect to mariadb by giving db info
 		wp config create --allow-root \
     --dbname=$DB_NAME \
     --dbuser=$DB_USER \
     --dbpass=$DB_PASSWORD \
     --dbhost=mariadb:3306
-    
+
     #wordpress setup
 	    #creates admin user etc
     wp core install --allow-root \
@@ -48,13 +48,18 @@ fi
 #webserver permissions
 chown -R www-data:www-data /var/www/html
 
+#--test-- change port 443
+    # wp option update siteurl "https://localhost:8443" --allow-root
+    # wp option update home "https://localhost:8443" --allow-root
+    #--test--
+
 #start PHP-FPM in background
 echo "Starting PHP-FPM 8.2..."
 
 ################# WEBSITE CUSTOM
 
-# # Update the content of post ID 1 (the default Hello World post)
-# wp post update 1 --post_title='Orange Juice' --post_content='This is a fresh glass of orange juice.' --allow-root
+# Update the content of post ID 1 (the default Hello World post)
+wp post update 1 --post_title='Orange Juice' --post_content='This is a fresh glass of orange juice.' --allow-root
 
 # # Allow people to post comments on new articles
 # wp option update default_comment_status "open" --allow-root
