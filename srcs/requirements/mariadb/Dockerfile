@@ -12,7 +12,7 @@ COPY conf/50-server.cnf /etc/mysql/my.cnf
 
 RUN chmod +x /usr/local/bin/script.sh
 
-#port on which MariaDB listens
+#port on which MariaDB listens (informational)
 EXPOSE 3306
 
 CMD ["/usr/local/bin/script.sh"]

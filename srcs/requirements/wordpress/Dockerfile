@@ -9,7 +9,7 @@ RUN apt update -y && \
     php8.2-mysql \
     mariadb-client \
     curl
-    	#-php -php that talks to mariadb -mysql command -curl
+    	#-php -php fpm -mysql command -curl
 
 #delete temporary package lists
 RUN rm -rf /var/lib/apt/lists/*

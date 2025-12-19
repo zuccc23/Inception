@@ -1,7 +1,7 @@
 DOCKER_COMPOSE = docker compose
 COMPOSE_FILE = ./srcs/docker-compose.yml
 NAME = inception
-VOLUME = /home/dahmane/data/wordpress /home/dahmane/data/mariadb
+VOLUME_PATH = /home/dahmane/data
 
 # --- MAIN TARGETS ---
 all: build up
@@ -45,11 +45,12 @@ ps:
 	@echo "📋 Listing container status..."
 	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) ps
 
-# Stops, removes all containers, and cleans dangling images.
+# Stops, removes all containers + volumes
 fclean: clean
-	@echo "🧹 Cleaning up dangling images and old volumes..."
+	@echo "🧹 Cleaning up volumes..."
 	docker volume prune -f
-	docker rmi $$(docker images -f "dangling=true" -q) || true
+	@sudo rm -rf $(VOLUME_PATH)/wordpress/*
+	@sudo rm -rf $(VOLUME_PATH)/mariadb/*
 
 # --- HELPER TARGETS ---
 # Access the NGINX container shell

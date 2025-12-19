@@ -20,16 +20,12 @@ RUN openssl req -x509 -nodes -days 365 \
     -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=dahmane.42.fr/UID=dahmane"
 
 #config files
-#RUN mkdir -p /var/run/nginx
     #copy our conf file inside the docker image
 COPY /conf/default.conf /etc/nginx/sites-available/default
-    #creates a symbolic link to enable our custrom config file
+    #creates a symbolic link to enable our custom config file
 RUN ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
     #remove defaults index file
 RUN rm -rf /var/www/html/index.nginx-debian.html
-    # add rights
-# RUN chmod 755 /var/www/html
-# RUN chown -R www-data:www-data /var/www/html
 
 #makes port 443 accessible
 EXPOSE 443

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sleep 30
+sleep 15
 while ! nc -z mariadb 3306; do
     echo "MariaDB is unavailable - waiting 2 seconds..."
     sleep 2
@@ -50,4 +50,20 @@ chown -R www-data:www-data /var/www/html
 
 #start PHP-FPM in background
 echo "Starting PHP-FPM 8.2..."
+
+################# WEBSITE CUSTOM
+
+# # Update the content of post ID 1 (the default Hello World post)
+# wp post update 1 --post_title='Orange Juice' --post_content='This is a fresh glass of orange juice.' --allow-root
+
+# # Allow people to post comments on new articles
+# wp option update default_comment_status "open" --allow-root
+
+# # Optional: Disable the requirement that users must be registered to comment
+# wp option update comment_registration 0 --allow-root
+
+# # Optional: Disable the requirement that an admin must manually approve every comment
+# wp option update comment_moderation 0 --allow-root
+
+##################
 exec /usr/sbin/php-fpm8.2 -F

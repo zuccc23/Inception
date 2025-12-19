@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo ">>> Starting MariaDB service..."
+echo "Starting MariaDB service..."
 
 service mariadb start
 
@@ -18,6 +18,6 @@ echo ">>> Shutting down temporary MariaDB..."
 
 mysqladmin -u root -p$DB_ROOT_PASSWORD shutdown
 
-echo ">>> Final launch of MariaDB as PID 1..."
+echo ">>> Relaunch of Mariadb"
 
 exec mysqld_safe
